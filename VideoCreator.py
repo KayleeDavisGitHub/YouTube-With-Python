@@ -1,25 +1,11 @@
-## Get Video --------
+##
+## Kaylee Davis
+##
 
-# Step I : Pytube:
-# terminal: python - m pip install pytube
-
-# Step II : In your script import the YouTube class from pytube package.
-# from pytube import YouTube
-
-# Step III : Create an object of YouTube bypassing the video URL
-# yt = YouTube("<Your youtube URL>")
-
-# Step IV : Use the filter method to specify the download format of the video
-# mp4_files = yt.streams.filter(file_extension="mp4")
-
-# Step V : Get the video you want by specifying the resolution
-# mp4_369p_files = mp4_files.get_by_resolution("360p")
-
-# Step VI : Save the downloaded video to the local file system
-# mp4_369p_files.download("<Download folder path>")
-
-
+# Install
+# pip install pytube
 from pytube import YouTube
+# This can help us get around YouTube premium requirements for video downloads:
 
 def download_360p_mp4_videos(url: str, outpath: str = "./"):
 
@@ -27,19 +13,17 @@ def download_360p_mp4_videos(url: str, outpath: str = "./"):
 
     yt.streams.filter(file_extension="mp4").get_by_resolution("360p").download(outpath)
 
-
 if __name__ == "__main__":
 
     download_360p_mp4_videos(
-         "https://www.youtube.com/watch?v=TnlfHHw8Oiw" # put in bunch of video URLS
-        "C:/Users/mailk/OneDrive/Documents/Python Scripts/scraped_videos", 
+         "https://www.youtube.com/watch?v=TnlfHHw8Oiw" # <--- Video URL here
+        "C:/Users/mailk/OneDrive/Documents/Python Scripts/scraped_videos", # <--- File Path to save video here
     )
 
-## Get Subtitles ------
+## Get Subtitles for video ------
+
 # Install
 # pip install youtube_transcript_api
-
-# we import the required package.
 from youtube_transcript_api import YouTubeTranscriptApi 
 
 # we create the generate_transcript() function, which accepts the video id as
@@ -62,19 +46,22 @@ def generate_transcript(id):
 		
 	return script, len(script.split()) # we return the values.
 
-id = 'TnlfHHw8Oiw' # from URL above
+id = 'TnlfHHw8Oiw' # from download URL up above
 transcript, no_of_words = generate_transcript(id) # we call our function by passing the video id.
 
 # Print:
 print(transcript)
 
-## Translation ------
+## Translation if needed: ------ [Not Run]
+
+
+ # https://stackoverflow.com/questions/52455774/googletrans-stopped-working-with-error-nonetype-object-has-no-attribute-group
+
 
 # Install:
 # pip install googletrans
 import googletrans
 print(googletrans.LANGUAGES) # all languages and their shorthands
-
 
 from googletrans import Translator
 translator = Translator()
@@ -88,11 +75,8 @@ print(result.origin)
 print(result.text)
 print(result.pronunciation)
 
-
-
 # pip install google_trans_new
 from google_trans_new import google_translator  
 translator = google_translator()  
 translate_text = translator.translate("yes",lang_tgt='uk')  
 print(translate_text)
- # https://stackoverflow.com/questions/52455774/googletrans-stopped-working-with-error-nonetype-object-has-no-attribute-group
